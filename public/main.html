@@ -1,0 +1,18 @@
+<html ng-app='beerApp'>
+	<head>		
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-cookies.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular-route.js"></script>
+		<script src="services/Network.js"></script>
+		<script src="controllers/userController.js"></script>
+		<script src="controllers/beerController.js"></script>
+		<script src="app.js"></script>
+		<!--<script src="bundle.js"></script>-->
+	</head>
+
+	<body ng-controller='userController'>
+		<ng-view></ng-view>
+	</body>
+</html>
+

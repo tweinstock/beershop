@@ -1,0 +1,30 @@
+[
+	{
+		"id" : "0",
+		"name" : "stella",
+		"alcohol" : "5.2",
+		"price" : "4",
+		"img" : "./css/beers/stella.jpg",
+		"img_tumb" : "./css/beers/stella_tumb.jpg",
+		"description" : "Stella Artois /ˈstɛlə ɑrˈtwɑː/, informally called Stella, is a pilsner beer of between 4.8 and 5.2% ABV. It has been brewed in Leuven, Belgium, since 1926, although it is also brewed in other locations. A lower alcohol content (4% ABV) version is also sold in the UK, Republic of Ireland, Canada and New Zealand.[1] Stella Artois is one of the prominent brands of Anheuser-Busch InBev, the world's largest brewer."
+	},
+	{
+		"id" : "1",
+		"name" : "carlsberg",
+		"alcohol" : "5.4",
+		"price" : "3",
+		"img" : "./css/beers/carlsberg.jpg",
+		"img_tumb" : "./css/beers/carlsberg_tumb.jpg",
+		"description" : "The Carlsberg Group (/ˈkɑrlzbərɡ/; Danish: [kʰɑːˀlsb̥æɐ̯ˀ]) is a Danish brewing company founded in 1847 by J. C. Jacobsen with headquarters located in Copenhagen, Denmark. The company's flagship brand is Carlsberg Beer (named after Jacobsen's son Carl) but it also brews Tuborg, Kronenbourg, Somersby cider, Russia's best selling beer Baltika, Belgian Grimbergen abbey beers and more than 500 local beers."
+	},
+	{
+		"id" : "2",
+		"name" : "tuborg",
+		"alcohol" : "5.6",
+		"price" : "2.5",
+		"img" : "./css/beers/tuborg.jpg",
+		"img_tumb" : "./css/beers/tuborg_tumb.jpg",
+		"description" : "Tuborg is a Danish brewing company founded in 1873 by Carl Frederik Tietgen. Since 1970 it has been part of the Carlsberg Group. The brewery was founded in Hellerup (Gentofte Municipality), a part of northern Copenhagen."
+	}
+
+]

@@ -1,0 +1,24 @@
+<container>
+	<header>
+		<a href="#" class="logo">Williamhill Beers Time</a>
+		<a href="javascript:void(0);" class="login" ng-click='ShowLoginPopup()' ng-if="!loggedIn">Login</a>
+		<a href="javascript:void(0);" class="cart" ng-if="loggedIn" ng-click='getCart()'></a>
+	</header>
+	<search></search>
+	<content>
+		<box ng-repeat='beer in beers'>
+			<div class="name">{{beer.name}}</div>
+			<img ng-src='{{beer.img}}'></img>
+			<a href="javascript:void(0)" ng-click="viewMore( beer.id )" >View More</a>
+			<div ng-if="loggedIn">
+				<div class="count">{{cartObj[beer.id] || 0}}</div>
+				<button ng-click="addCount( beer.id );">+</button>
+				<button ng-click="removeCount( beer.id );">-</button>
+			</div>
+		</box>
+	</content>
+
+	<login ng-show="showLogin && !loggedIn"></login>
+	<description  ng-show=showDesc></description> 
+	<cart ng-if="showCart"></cart>
+</container>

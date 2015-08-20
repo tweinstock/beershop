@@ -1,0 +1,18 @@
+<closeMe ng-click="closeMe()"></closeMe>
+<h2>CheckOut</h2>
+<ul>
+	<li>
+		<label>Name</label> 
+		<div>Count</div> 
+		<div>Price per unit</div>
+		<div>Price Total</div>
+	</li>
+	<li ng-repeat="cart in cartList" ng-if="cart.id">
+		<label>{{cart.name}}</label> 
+		<div>X{{cart.count}}</div> 
+		<div> {{cart.priceUnit}} $</div>
+		<div> {{cart.priceTotal}} $</div> 
+	</li>
+</ul>
+<div id="total">Total : {{cartList.total}} $</div>
+<button ng-click='removeCart()'>CheckOut</button>
