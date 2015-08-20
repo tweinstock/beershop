@@ -6,7 +6,13 @@ function Network($http)
 	}
 
 	this.post = function(urlData,jsonData){
-		return $http.post(urlData,jsonData); // return promise
+		//return $http.post(urlData,jsonData); // return promise
+		return $http({
+			method: "POST",
+            url: urlData,
+            data: jsonData,
+            timeout: 1000
+		})
 	}
 	this.put = function(urlData,jsonData){
 		return $http.put(urlData,jsonData); // return promise
