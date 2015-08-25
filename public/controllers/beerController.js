@@ -1,13 +1,19 @@
 function beerController($scope,$q,$location,Network)
 {
 	/* load the get only once */
-
-	$scope.cartObj = {} ;
 	$scope.cartList = {} ;
 	$scope.showCart = false ;
 	
     Network.get('http://localhost/beers').then(function(data) {
 		$scope.beers = data.data;
+	});
+
+	Network.get('http://localhost/getCart').then(function(data) {
+		$scope.cartObj = data.data;
+		$scope.countCartObj = Object.keys( data.data ).length;
+		/* return as string or empty project, if empty, create an empty object */
+		if($scope.cartObj == undefined || JSON.stringify($scope.cartObj) === '{}' || $scope.cartObj.length == 0)
+			$scope.cartObj = {};
 	});
 
 	$scope.viewMore = function( e ){
@@ -26,10 +32,17 @@ function beerController($scope,$q,$location,Network)
 
 	$scope.createCart = function(jsonCart){
 		Network.put('http://localhost/addToCart',jsonCart).then(function(data) {
+			$scope.countCartObj = Object.keys( $scope.cartObj ).length;
 		});
 	}
 
 	$scope.getCart = function(){
+		console.log()
+		if( Object.keys($scope.cartObj).length === 0 ){
+			alert('Your cart is empty');
+			return false;
+		}
+
 		Network.get('http://localhost/getCart').then(function(data) {
 			$scope.cartObj = data.data;
 
@@ -42,7 +55,6 @@ function beerController($scope,$q,$location,Network)
 				$scope.showCart = true;
 			}
 		});
-
 
 		$scope.buildCartList();
 	}
@@ -109,4 +121,25 @@ function beerController($scope,$q,$location,Network)
 
 		$location.path('/thankyou');
 	}
+
+	$scope.removeFromCart = function( id_ ){
+		for( el in $scope.cartList ){
+			if( el == id_ )
+				delete $scope.cartList[ el ];
+		}
+		for( el in $scope.cartObj ){
+			if( el == id_ )
+				delete $scope.cartObj[ el ];
+		}
+
+		$scope.createCart($scope.cartObj);
+	}
+
+	/*event listener*/
+	$scope.$on("logout",function () {
+		$scope.cartList = {} ;
+		$scope.showCart = false ;
+		$scope.cartObj = {};
+		$scope.countCartObj = 0;
+	});
 }

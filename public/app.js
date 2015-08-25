@@ -1,5 +1,5 @@
 angular.module('beerApp', ['ngCookies','ngRoute'])
-	.controller('userController',['$scope', '$cookies','Network',userController])
+	.controller('userController',['$scope','$rootScope','$cookies','Network',userController])
 	.controller('beerController',['$scope','$q','$location','Network',beerController])
 	.service('Network',Network)
 	.directive('login', function() {

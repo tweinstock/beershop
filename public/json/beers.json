@@ -25,6 +25,33 @@
 		"img" : "./css/beers/tuborg.jpg",
 		"img_tumb" : "./css/beers/tuborg_tumb.jpg",
 		"description" : "Tuborg is a Danish brewing company founded in 1873 by Carl Frederik Tietgen. Since 1970 it has been part of the Carlsberg Group. The brewery was founded in Hellerup (Gentofte Municipality), a part of northern Copenhagen."
+	},
+	{
+		"id" : "3",
+		"name" : "Corona",
+		"alcohol" : "4.6",
+		"price" : "5",
+		"img" : "./css/beers/corona.jpg",
+		"img_tumb" : "./css/beers/corona_tumb.jpg",
+		"description" : "Corona Extra is a pale lager produced by Cervecería Modelo in Mexico for domestic distribution and export to all other countries besides the United States, and by Constellation Brands in Mexico for export to the United States. The split ownership is a result of an anti-trust settlement permitting the merger of Grupo Modelo with AB InBev. It is one of the top-selling beers worldwide.[2] Outside of Mexico, Corona is commonly served with a wedge of lime or lemon in the neck of the bottle to add tartness and flavor. In the United States, Corona Extra is the top selling imported beer"
+	},
+	{
+		"id" : "4",
+		"name" : "Breezer",
+		"alcohol" : "6.6",
+		"price" : "5.5",
+		"img" : "./css/beers/breezer.jpg",
+		"img_tumb" : "./css/beers/breezer_tumb.jpg",
+		"description" : "Bacardi Breezer, Breezer for short, is a fruit wine–based alcopop with 4.4% alcohol in Australia, 4%/5% Canada, in Europe, 6.6% in the United Kingdom, and 4.8% in India. It comes in a variety of fruit flavours: lemon, peach, pineapple, apple, ruby grapefruit, lime, orange, blackberry, watermelon, cranberry, coconut, raspberry, blueberry, pomegranate, strawberry, and mango, and it is also available in both chocolate and piña colada flavours. A number of the flavours are available in the Half Sugar range. The drink is particularly popular in India, Europe (especially the UK), Israel, Canada, and Australia, and is also available in China. In India, Bacardi Breezer was the first entrant in the ready to drink category and is currently the market leader in its segment. In Thailand Breezers are actually wine coolers but still give the appearance that they contain fruits. A new fruit wine–based variant has been released, called Breezer Spritzer."
+	},
+	{
+		"id" : "5",
+		"name" : "Modelo",
+		"alcohol" : "5",
+		"price" : "7",
+		"img" : "./css/beers/modelo.jpg",
+		"img_tumb" : "./css/beers/modelo_tumb.jpg",
+		"description" : "Grupo Modelo is a large brewery in Mexico owned by Belgian-Brazilian company Anheuser-Busch InBev. It has 63% of the Mexican beer market,[1] and exports beer to most countries of the world. Its export brands include Corona, Modelo, and Pacífico.[2] Grupo Modelo also brews brands intended solely for the domestic Mexican market, Estrella (a local beer found only in western Mexico); and León and Montejo (originally local to Yucatán but now available nationwide). Grupo Modelo has exclusive rights in Mexico for the import and distribution of beer produced by Anheuser-Busch.[2] Until the 1960s, Grupo Modelo used red poppy flowers in its advertising, where almost any image it used had poppy flowers somewhere in the image."
 	}
 
 ]

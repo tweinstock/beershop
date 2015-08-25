@@ -29920,13 +29920,19 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 function beerController($scope,$q,$location,Network)
 {
 	/* load the get only once */
-
-	$scope.cartObj = {} ;
 	$scope.cartList = {} ;
 	$scope.showCart = false ;
 	
     Network.get('http://localhost/beers').then(function(data) {
 		$scope.beers = data.data;
+	});
+
+	Network.get('http://localhost/getCart').then(function(data) {
+		$scope.cartObj = data.data;
+		$scope.countCartObj = Object.keys( data.data ).length;
+		/* return as string or empty project, if empty, create an empty object */
+		if($scope.cartObj == undefined || JSON.stringify($scope.cartObj) === '{}' || $scope.cartObj.length == 0)
+			$scope.cartObj = {};
 	});
 
 	$scope.viewMore = function( e ){
@@ -29945,13 +29951,20 @@ function beerController($scope,$q,$location,Network)
 
 	$scope.createCart = function(jsonCart){
 		Network.put('http://localhost/addToCart',jsonCart).then(function(data) {
+			$scope.countCartObj = Object.keys( $scope.cartObj ).length;
 		});
 	}
 
 	$scope.getCart = function(){
+		console.log()
+		if( Object.keys($scope.cartObj).length === 0 ){
+			alert('Your cart is empty');
+			return false;
+		}
+
 		Network.get('http://localhost/getCart').then(function(data) {
 			$scope.cartObj = data.data;
-			
+
 			/* return as string or empty project, if empty, create an empty object */
 			if($scope.cartObj == undefined || JSON.stringify($scope.cartObj) === '{}' || $scope.cartObj.length == 0){
 				$scope.cartObj = {};
@@ -29961,7 +29974,6 @@ function beerController($scope,$q,$location,Network)
 				$scope.showCart = true;
 			}
 		});
-
 
 		$scope.buildCartList();
 	}
@@ -30012,6 +30024,7 @@ function beerController($scope,$q,$location,Network)
 		if( $scope.cartObj[e] != undefined && $scope.cartObj[e] > 0 ){
 			$scope.cartObj[e]--;
 
+			/*if 0, delete from object*/
 			if($scope.cartObj[e] == 0){
 				delete $scope.cartObj[e];
 			}
@@ -30027,40 +30040,84 @@ function beerController($scope,$q,$location,Network)
 
 		$location.path('/thankyou');
 	}
+
+	$scope.removeFromCart = function( id_ ){
+		for( el in $scope.cartList ){
+			if( el == id_ )
+				delete $scope.cartList[ el ];
+		}
+		for( el in $scope.cartObj ){
+			if( el == id_ )
+				delete $scope.cartObj[ el ];
+		}
+
+		$scope.createCart($scope.cartObj);
+	}
+
+	/*event listener*/
+	$scope.$on("logout",function () {
+		$scope.cartList = {} ;
+		$scope.showCart = false ;
+		$scope.cartObj = {};
+		$scope.countCartObj = 0;
+	});
 }
 
-function userController($scope,$cookies,Network)
+function userController($scope,$rootScope,$cookies,Network)
 {
-	
+	$scope.username = $cookies.get('username') || '';
+	$scope.password = '';
+	$scope.wrongLogin = false;
+
 	Network.get('http://localhost/isLoggedIn').then(function(data) {
 		$scope.loggedIn = (data.data == 'true' ? true : false);
 	});
 
 	$scope.doLogin = function(){
-			/* get data and check if user exists */
+		/* get data and check if user exists */
 
-			var user_json = {
-				username: $scope.username,
-				password: $scope.password
-			};
+		var user_json = {
+			username: $scope.username,
+			password: $scope.password
+		};
 
-			Network.post('http://localhost/login',JSON.stringify(user_json)).then(function(data) {
+		Network.post('http://localhost/login',JSON.stringify(user_json)).then(function(data) {
+
+			$scope.loggedIn = false;
+			$cookies.put('isLoggedIn', '0');
+
+			if(data.data == 'true'){
+				$cookies.put('isLoggedIn', '1');
+				$cookies.put('username', (JSON.parse(data.config.data)).username );
+				$scope.loggedIn = true;
+			}
+
+		}).catch(function(response) {
+			if( !response.data ){
+				$scope.wrongLogin = true;
+			}
+		});
+	}
+
+	$scope.logOut = function(){		
+		Network.get('http://localhost/logOut').then(function(data) {
+			if( data.data == "true"){
+				$cookies.remove('isLoggedIn');
+				$cookies.remove('username');
 				$scope.loggedIn = false;
-				$cookies.put('isLoggedIn', '0');
-
-				if(data.data == 'true'){
-					$cookies.put('isLoggedIn', '1');
-					$scope.loggedIn = true;
-				}
-			});
-		}
+				$scope.wrongLogin = false;
+				$rootScope.$broadcast("logout");
+			}
+			else{
+				console.log('could not log out, error :' + data.data);
+			}
+		});	
+	}
 
 	$scope.ShowLoginPopup = function(){
 		$scope.showLogin = true;
 	}
 
-	$scope.username = 'Tomer';
-	$scope.password = '123';
 }
 
 function Network($http)
@@ -30071,7 +30128,14 @@ function Network($http)
 	}
 
 	this.post = function(urlData,jsonData){
-		return $http.post(urlData,jsonData); // return promise
+		//return $http.post(urlData,jsonData); // return promise
+		return $http({
+			method: "POST",
+            url: urlData,
+            data: jsonData,
+            timeout: 400
+		});
+      	
 	}
 	this.put = function(urlData,jsonData){
 		return $http.put(urlData,jsonData); // return promise
@@ -30082,7 +30146,7 @@ function Network($http)
   		
 }
 angular.module('beerApp', ['ngCookies','ngRoute'])
-	.controller('userController',['$scope', '$cookies','Network',userController])
+	.controller('userController',['$scope','$rootScope','$cookies','Network',userController])
 	.controller('beerController',['$scope','$q','$location','Network',beerController])
 	.service('Network',Network)
 	.directive('login', function() {

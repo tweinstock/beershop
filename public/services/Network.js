@@ -11,8 +11,9 @@ function Network($http)
 			method: "POST",
             url: urlData,
             data: jsonData,
-            timeout: 1000
-		})
+            timeout: 400
+		});
+      	
 	}
 	this.put = function(urlData,jsonData){
 		return $http.put(urlData,jsonData); // return promise

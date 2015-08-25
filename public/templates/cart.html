@@ -8,10 +8,12 @@
 		<div>Price Total</div>
 	</li>
 	<li ng-repeat="cart in cartList" ng-if="cart.id">
+		<img ng-src="{{cart.img_tumb}}">
 		<label>{{cart.name}}</label> 
 		<div>X{{cart.count}}</div> 
 		<div> {{cart.priceUnit}} $</div>
 		<div> {{cart.priceTotal}} $</div> 
+		<a href="javascript:void(0)" ng-click="removeFromCart( cart.id );"><img ng-src="./css/remove_icon.png"></a>
 	</li>
 </ul>
 <div id="total">Total : {{cartList.total}} $</div>

@@ -1,6 +1,6 @@
 <closeMe ng-click="closeMe()"></closeMe>
 <h2>Login</h2>
+<div class="wrongLogin" ng-if="wrongLogin">Wrong username or password</div>
 <input type="text" name="username" placeholder="username" ng-model='username'>
 <input type="password" name="password" placeholder="password" ng-model='password'>
 <button ng-click='doLogin();'>Log</button>
-user is logged in : {{loggedIn}}

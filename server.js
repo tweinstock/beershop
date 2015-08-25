@@ -39,6 +39,7 @@ app.get('/isLoggedIn', function(req, res){
     res.end('false');
 });
 
+
 app.post('/login', function(req, res){
 
     var username = req.body.username;
@@ -107,7 +108,14 @@ app.delete('/deleteCart', function(req, res){
   res.end(JSON.stringify(req.session.cart));
 });
 
-
+app.get('/logOut', function(req, res){
+    req.session.destroy(function(err) {
+      if( err )
+        res.end( err );
+      else
+        res.end('true');
+    })
+})
 
 
 
