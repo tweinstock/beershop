@@ -9,7 +9,7 @@
 	</li>
 	<li ng-repeat="cart in cartList" ng-if="cart.id">
 		<img ng-src="{{cart.img_tumb}}">
-		<label>{{cart.name}}</label> 
+		<label>{{cart.name | capitalize}}</label> 
 		<div>X{{cart.count}}</div> 
 		<div> {{cart.priceUnit}} $</div>
 		<div> {{cart.priceTotal}} $</div> 
@@ -17,4 +17,4 @@
 	</li>
 </ul>
 <div id="total">Total : {{cartList.total}} $</div>
-<button ng-click='removeCart()'>CheckOut</button>
+<button ng-if='showCheckOut' ng-click='removeCart()'>CheckOut</button>

@@ -25,6 +25,11 @@ angular.module('beerApp', ['ngCookies','ngRoute'])
 			}
 		}
 	)
+	.filter('capitalize', function(){
+		return function(input){
+			return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
+		}
+	})
 	.config(['$routeProvider',function($routeProvider) {
 	  $routeProvider
 	   .when('/', {
@@ -39,4 +44,5 @@ angular.module('beerApp', ['ngCookies','ngRoute'])
         redirectTo: '/'
       });
 	}])
+
 

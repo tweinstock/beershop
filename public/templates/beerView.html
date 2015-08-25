@@ -10,7 +10,7 @@
 	<search><input class="filterBox" ng-model="query" placeholder="Search a Beer"></search>
 	<content>
 		<box ng-repeat='beer in filteredBeers = ( beers | filter:{ name: query }) | orderBy:"name"'>
-			<div class="name">{{beer.name}}</div>
+			<div class="name">{{beer.name|capitalize}}</div>
 			<img ng-src='{{beer.img}}'></img>
 			<a href="javascript:void(0)" ng-click="viewMore( beer.id )" >View More</a>
 			<div ng-if="loggedIn">

@@ -87,6 +87,15 @@ function beerController($scope,$q,$location,Network)
 
 	   $q.all(promises).then(function(data){
 	    	$scope.cartList = data[0];
+	    	$scope.showCheckOut = true;
+
+	    	/*empty cart? show 0 in total price and not empty string*/
+
+	    	if($scope.cartList == undefined || $scope.cartList.length == 0){
+	    		$scope.cartList = {'total' : 0};
+	    		$scope.showCheckOut = false;
+	    	}
+	
 	   });
 	}
 
@@ -132,7 +141,8 @@ function beerController($scope,$q,$location,Network)
 				delete $scope.cartObj[ el ];
 		}
 
-		$scope.createCart($scope.cartObj);
+		//$scope.createCart($scope.cartObj);
+		$scope.buildCartList();
 	}
 
 	/*event listener*/
